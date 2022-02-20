@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #101010;
+        }
+
+        form {
+            width: 400px;
+            height: 380px;
+            background-color: #293031;
+            padding: 20px;
+            box-sizing: border-box;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form input {
+            width: 100%;
+            height: 30px;
+            display: block;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            box-sizing: border-box;
+        }
+
+        .mya {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 20x;
+        }
+
+        .mya a:nth-child(1) {
+            float: left;
+        }
+
+        .mya a:nth-child(2) {
+            float: right;
+        }
+
+        button {
+            width: 100%;
+            height: 40px;
+            background-color: rgb(235, 235, 235);
+            border: none;
+        }
+
+        button:active {
+            box-shadow: 0 0 3px rgb(173, 172, 172);
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="">
+        <h2><font color="#FFFFFF">注册界面</font></h2>
+        <input id="username"      type="text"     placeholder="请输入账号">
+        <input id="password"      type="password" placeholder="请输入密码">
+        <input id="passwordAgain" type="password" placeholder="请重复密码">
+        <input id="email"         type="text"     placeholder="请输入邮箱">
+        <div class="mya">
+           <a href="/login"><font color="#FFFFFF">登录</font></a>
+        </div>
+        <button id="reg-btn" type="button">注册</button>
+    </form>
+
+    <script>
+        let username = document.getElementById('username')
+        let password = document.getElementById('password')
+        let passwordA= document.getElementById('passwordAgain')
+        let email    = document.getElementById('email')
+        let regBtn = document.getElementById('reg-btn')
+
+        regBtn.onclick = function() {
+
+                if ( username.value == '' || password.value == '' || email.value == '' || passwordA.value == ''){
+                    alert( "不能留空" )
+                    return
+                }
+
+                if ( password.value != passwordA.value ){
+                    alert( "两次输入的密码不同" )
+                    return
+                }
+
+                const xhr = new XMLHttpRequest()
+                let formdata = new FormData()
+
+                formdata.append("username" , username.value)
+                formdata.append("password" , password.value)
+                formdata.append("email"    , email.value)
+                xhr.open('POST', '/post/registe')
+                xhr.send(formdata)
+
+                xhr.onload = function (){
+
+                    var obj = eval("("+ xhr.responseText + ")");
+                    alert( obj.data.message );
+
+                    if ( obj.data.message == "注册成功" )
+                        window.location.href = '/login';
+
+                }
+
+        }
+    </script>
+</body>
+
+</html>

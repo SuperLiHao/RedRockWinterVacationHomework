@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#b01").click(function(){
+
+	const xhr = new XMLHttpRequest();
+
+	xhr.open('GET', "http://localhost/test")
+	xhr.send();
+    htmlobj=$.ajax({url:"http://localhost/test",async:false});
+      $("#myDiv").html(htmlobj.responseText);
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="myDiv"><h2>通过 AJAX 改变文本</h2></div>
+<button id="b01" type="button">通过点击改变内容</button>
+
+</body>
+</html>
