@@ -34,9 +34,9 @@ func FromTime(aTime time.Time) UUID {
 
 	copy(u[10:], hardwareAddr)
 
-	u[6] |= 0x10 // set version to 1 (time based uuid)
-	u[8] &= 0x3F // clear variant
-	u[8] |= 0x80 // set to IETF variant
+	u[6] |= 0x10
+	u[8] &= 0x3F
+	u[8] |= 0x80 
 
 	return u
 }
