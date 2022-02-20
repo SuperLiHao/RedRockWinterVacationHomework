@@ -27,7 +27,7 @@ func CreateNewCaptcha() (string, string, error) {
 	} else {
 		b64s = strings.ReplaceAll(b64s, "data:image/png;base64,", "")
 		//fmt.Println(id, "-", b64s)
-		SavePicture(b64s)
+		//SavePicture(b64s)
 		return id, b64s, nil
 	}
 
